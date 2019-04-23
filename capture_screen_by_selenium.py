@@ -1,3 +1,5 @@
+"""使用selenium+chrome将网页保存为长图
+"""
 from selenium import webdriver
 
 # 初始化参数
