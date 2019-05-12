@@ -1,4 +1,4 @@
-### 将网页保存为pdf或者图片
+### 将网页保存为pdf或者image
 ##### 因为一些文章会被作者或者平台强制删除，此项目旨在将还未删除的内容保存为image or pdf。  
 
 
@@ -50,7 +50,6 @@
 
   基于[WeasyPrint](http://weasyprint.org/)，具体参照[html2pdf-server](https://github.com/spoqa/html2pdf-server)
 
-  
 
 
 ##### 参考链接
