@@ -51,6 +51,10 @@
   基于[WeasyPrint](http://weasyprint.org/)，具体参照[html2pdf-server](https://github.com/spoqa/html2pdf-server)
 
 
+- **Full Page Screen Capture**
+
+  Chrome浏览器的一个全屏截取插件，支持image/pdf保存方式
+
 
 ##### 参考链接
 * [selenium+Phantomjs保存长图](https://www.cnblogs.com/Jack-cx/p/9405737.html) 
