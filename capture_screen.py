@@ -48,32 +48,21 @@ def html2pdf_by_server(driver, url, output_file):
     driver.get(url)
     html = driver.page_source
     server_url = 'http://localhost:8081'
-    data = {
+    header = {
         'Content-Type': 'text/html; charset=utf-8',
         'Accept': 'application/pdf',
-        'data': html
     }
-    response = requests.post(server_url, json=data)
-    with open(output_file, 'wb') as f:
-        f.write(response._content)
+    response = requests.post(server_url, data=html, headers=header)
+    save_response_content(response, output_file)
 
 def html2img_by_server(driver, url, output_file):
     """save html to image with html2pdf-server"""
     driver.get(url)
     html = driver.page_source
     server_url = 'http://localhost:8081'
-    data = {
+    header = {
         'Content-Type': 'text/html; charset=utf-8',
         'Accept': 'image/png',
-        'data': html
     }
-    response = requests.post(server_url, json=data)
-    with open(output_file, 'wb') as f:
-        f.write(response._content)
-
-
-from pyfunctions.functions import make_driver
-
-d = make_driver('chrome', True)
-html2img_by_server(d, 'https://www.baidu.com', 'baidu.png')
-html2pdf_by_server(d, 'https://www.baidu.com', 'baidu.pdf')
+    response = requests.post(server_url, data=html, headers=header)
+    save_response_content(response, output_file)

@@ -49,9 +49,20 @@
 
 - **html2pdf-server**
 
-  ```text
-  基于[WeasyPrint](http://weasyprint.org/)，
-  具体参照[html2pdf-server](https://github.com/spoqa/html2pdf-server)
+  基于WeasyPrint
+  
+  ```python
+  from pyfunctions.functions import make_driver
+  from capture_screen import html2pdf_by_server, html2img_by_server
+  
+  d = make_driver(driver='chrome', load_img=True)
+  
+  url = 'https://www.baidu.com/'
+  output_pdf = 'baidu.pdf'
+  output_png = 'baidu.png'
+
+  html2img_by_server(d, url, output_png)
+  html2pdf_by_server(d, url, output_pdf)
   ```
 
 - **Full Page Screen Capture**
