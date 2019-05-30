@@ -5,35 +5,13 @@
 3.CS方式，上传html，返回pdf
 """
 
+import requests
 import imgkit  # pip install imgkit
 import pdfkit  # pip install pdfkit
-from selenium import webdriver  # pip install selenium
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from pyfunctions.functions import save_response_content
 
 
-def make_driver(driver='chrome'):
-    """创建driver"""
-    driver = driver.lower()
-    if driver == 'chrome':
-        # 初始化参数
-        option = webdriver.ChromeOptions()
-        option.add_argument('--headless')
-        option.add_argument('--disable-gpu')
-        option.add_argument("--hide-scrollbars")
-        option.add_argument("--no-sandbox")
-        option.add_experimental_option('excludeSwitches', ['enable-automation'])
-        option.add_argument('user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"')
-        d = webdriver.Chrome(options=option) 
-    elif 'phantom' in driver:
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'
-        # phantomjs.exe位于同级目录下
-        d = webdriver.PhantomJS(desired_capabilities=dcap)
-    else:
-        raise ValueError('Unknown argument %s. Support chrome and phantomjs only.' % driver)
-    return d
-
-def html2img_by_selenium(url, driver, output_file):
+def html2img_by_selenium(driver, url, output_file):
     """selenium将html存为图片"""
     driver.get(url)
     # 获取高度和宽度
@@ -51,3 +29,51 @@ def html2img_by_imgkit(url, output_file):
 def html2pdf_by_pdfkit(url, output_file):
     """pdfkit将html存为pdf"""
     pdfkit.from_url(url, output_file)
+
+def html2img_by_splash(url, output_file):
+    """Use splash request url and save screenshot as png file"""
+    splash_url = "http://localhost:8050/render.png"
+    params = {
+        'url': url,
+        'render_all': 1,
+        'wait': 1,
+        'timeout': 5
+    }
+    response = requests.get(splash_url, params=params)
+    with open(output_file, 'wb') as f:
+        f.write(response._content)
+
+def html2pdf_by_server(driver, url, output_file):
+    """save html to pdf with html2pdf-server"""
+    driver.get(url)
+    html = driver.page_source
+    server_url = 'http://localhost:8081'
+    data = {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Accept': 'application/pdf',
+        'data': html
+    }
+    response = requests.post(server_url, json=data)
+    with open(output_file, 'wb') as f:
+        f.write(response._content)
+
+def html2img_by_server(driver, url, output_file):
+    """save html to image with html2pdf-server"""
+    driver.get(url)
+    html = driver.page_source
+    server_url = 'http://localhost:8081'
+    data = {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Accept': 'image/png',
+        'data': html
+    }
+    response = requests.post(server_url, json=data)
+    with open(output_file, 'wb') as f:
+        f.write(response._content)
+
+
+from pyfunctions.functions import make_driver
+
+d = make_driver('chrome', True)
+html2img_by_server(d, 'https://www.baidu.com', 'baidu.png')
+html2pdf_by_server(d, 'https://www.baidu.com', 'baidu.pdf')
