@@ -3,7 +3,9 @@
 
 
 
-#### 保存方式
+保存方式
+---
+
 - **selenium+chrome/phantomjs将网页存为图片**
 
   需要安装chromedriver/phantomjs，chromedriver的话还需要chrome浏览器
@@ -82,9 +84,24 @@
   
   html2img_by_splash(url, output_file)
   ```
-  
 
-##### 参考链接
+
+Compare
+---
+
+| star | name | description |
+| :---: | :---: | :---------: |
+| 😁 | pdfkit | Works perfect on all tests. [Example][pdfkit] |
+| 😭 | html2pdf-pdf | What a letdown! Works only on simple sites like [Baidu][baidu] |
+| 😭 | html2pdf-img | What a letdown! Works only on simple sites like [Baidu][baidu] |
+| 😔 | imgkit | Disappointed. At least on GitHub [Example][imgkit] |
+| 😁 | splash | Works perfect on all tests. [Example][splash] |
+| 😁 | selenium | Works perfect on all tests. [Example][selenium] |
+
+
+参考链接
+---
+
 * [selenium+Phantomjs保存长图](https://www.cnblogs.com/Jack-cx/p/9405737.html) 
 * [selenium+chrome图片拼接保存长图](https://www.cnblogs.com/sparkling-ly/p/5466644.html)
 * [selenium+chrome设置window size保存长图](http://www.cnblogs.com/MasterMonkInTemple/p/9970512.html)
@@ -93,3 +110,9 @@
 * [html2pdf-server](https://github.com/spoqa/html2pdf-server)
 * [splash](https://splash.readthedocs.io/en/stable/api.html#render-html)
 * [splash+requests](https://blog.csdn.net/mouday/article/details/82843401)
+
+[pdfkit]: https://github.com/broholens/images/blob/master/pdfkit.pdf
+[imgkit]: https://github.com/broholens/images/blob/master/imgkit.png
+[splash]: https://github.com/broholens/images/blob/master/splash.png
+[selenium]: https://github.com/broholens/images/blob/master/selenium.png
+[baidu]: https://www.baidu.com
