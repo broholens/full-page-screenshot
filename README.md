@@ -9,9 +9,10 @@
   需要安装chromedriver/phantomjs，chromedriver的话还需要chrome浏览器
 
   ```python
-  from capture_screen import make_driver, html2img_by_selenium
+  from pyfunctions.functions import make_driver  # pip install pyfunctions
+  from capture_screen import html2img_by_selenium
   
-  driver = make_driver(driver='chrome')
+  driver = make_driver(driver='chrome', load_img=True)
   url = 'https://www.baidu.com/'
   output_file = 'baidu.png'
   
@@ -48,19 +49,28 @@
 
 - **html2pdf-server**
 
-  基于[WeasyPrint](http://weasyprint.org/)，具体参照[html2pdf-server](https://github.com/spoqa/html2pdf-server)
-
-
+  ```text
+  基于[WeasyPrint](http://weasyprint.org/)，
+  具体参照[html2pdf-server](https://github.com/spoqa/html2pdf-server)
+  ```
 
 - **Full Page Screen Capture**
-
+  ```text
   Chrome浏览器的一个全屏截取插件，支持image/pdf保存方式
-  
-
+  ```
 
 - **splash**
+  
+  需要安装splash
 
-  [安装splash](https://splash.readthedocs.io/en/stable/install.html)
+  ```python
+  from capture_screen import html2img_by_splash
+
+  url = 'https://www.baidu.com/'
+  output_file = 'baidu.png'
+  
+  html2img_by_splash(url, output_file)
+  ```
   
 
 ##### 参考链接
@@ -70,3 +80,5 @@
 * [imgkit](https://github.com/jarrekk/imgkit)
 * [pdfkit](https://github.com/JazzCore/python-pdfkit)
 * [html2pdf-server](https://github.com/spoqa/html2pdf-server)
+* [splash](https://splash.readthedocs.io/en/stable/api.html#render-html)
+* [splash+requests](https://blog.csdn.net/mouday/article/details/82843401)
